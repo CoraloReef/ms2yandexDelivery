@@ -1,5 +1,6 @@
 # ms2yandexDelivery
-h1 Yandex Delivery for MODX minishop2
+
+Yandex Delivery for MODX minishop2
 
 Run PHP: 
 ```php
