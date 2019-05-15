@@ -60,6 +60,7 @@
         <strong>{$total.cost}</strong> {'ms2_frontend_currency' | lexicon}
     </h4>
 </div>
+
 <script src="https://delivery.yandex.ru/widget/loader?resource_id=*****&sid=*****&key=*****"></script>
 <script type="text/javascript">
     ydwidget.ready(function () {

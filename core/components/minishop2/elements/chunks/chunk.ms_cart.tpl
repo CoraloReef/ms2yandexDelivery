@@ -96,7 +96,8 @@
 </div>
 
 <script src="https://delivery.yandex.ru/widget/loader?resource_id=*****&sid=*****&key=*****"></script>
-<!-- Создаем условный объект с данными о содержимом корзины (для примера) -->
+
+<!-- Создаем объект с данными о содержимом корзины -->
 <script type="text/javascript">
     window.cart = {
         quantity: {$total.count}, // общее количество товаров
