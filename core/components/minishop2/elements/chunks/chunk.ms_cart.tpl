@@ -110,7 +110,7 @@
 <script type="text/javascript">
     ydwidget.ready(function(){
         ydwidget.initCartWidget({
-            //получить указанный пользователем город
+            // получить указанный пользователем город
             'getCity': function () {
                 var city = yd$('#city').val();
                 if (city) {
@@ -119,30 +119,30 @@
                     return false;
                 }
             },
-            //id элемента-контейнера
+            // id элемента-контейнера
             'el': 'ydwidget',
-            //общее количество товаров в корзине
+            // общее количество товаров в корзине
             'totalItemsQuantity': function () { return cart.quantity },
-            //общий вес товаров в корзине
+            // общий вес товаров в корзине
             'weight': function () { return cart.weight },
-            //общая стоимость товаров в корзине
+            // общая стоимость товаров в корзине
             'cost': function () { return cart.cost },
-            //габариты и количество по каждому товару в корзине
+            // габариты и количество по каждому товару в корзине
             'itemsDimensions': function () { return [
                 {foreach $products as $product}
-                [{$product.width[0]},{$product.length[0]},{$product.height[0]},{$product.count}],
+                    [{$product.width[0]},{$product.length[0]},{$product.height[0]},{$product.count}],
                 {/foreach}
             ] },
-            //объявленная ценность заказа. Влияет на расчет стоимости в предлагаемых вариантах доставки, для записи поля в заказ данное поле так же нужно передать в объекте order (поле order_assessed_value)
+            // объявленная ценность заказа. Влияет на расчет стоимости в предлагаемых вариантах доставки, для записи поля в заказ данное поле так же нужно передать в объекте order (поле order_assessed_value)
             'assessed_value': cart.cost,
-            //Способы доставки. Влияют на предлагаемые в виджете варианты способов доставки.
+            // Способы доставки. Влияют на предлагаемые в виджете варианты способов доставки.
             onlyDeliveryTypes: function(){ return ['todoor','pickup','post']; },
-            //обработка автоматически определенного города
+            // обработка автоматически определенного города
             'setCity': function (city, region) { yd$('#city').val(region ? city + ', ' + region : city) },
-            //обработка смены варианта доставки
+            // обработка смены варианта доставки
             'onDeliveryChange': function (delivery) {
-                //если выбран вариант доставки, выводим его описание и закрываем виджет, иначе произошел сброс варианта,
-                //очищаем описание
+                // если выбран вариант доставки, выводим его описание и закрываем виджет, иначе произошел сброс варианта,
+                // очищаем описание
                 if (delivery) {
                     // Вывод стоимости доставки и общей суммы
                     yd$('#delivery_price').text('Доставка: ' + delivery.costWithRules + ' руб.');
@@ -181,40 +181,40 @@
                     yd$('#payments').hide();
                 }
             },
-            //завершение загрузки корзинного виджета
+            // завершение загрузки корзинного виджета
             'onLoad': function () {
-                //при клике на радиокнопку, если это не радиокнопка "Яндекс.Доставка", сбрасываем выбранную доставку
-                //в виджете
+                // при клике на радиокнопку, если это не радиокнопка "Яндекс.Доставка", сбрасываем выбранную доставку
+                // в виджете
                 yd$(document).on('click', 'input:radio[name="delivery"]', function () {
                     if (yd$(this).not('#delivery_2')) {
                         ydwidget.cartWidget.setDeliveryVariant(null);
                     }
                 });
             },
-            //снятие выбора с варианта доставки "Яндекс.Доставка" (настроенного в CMS)
+            // снятие выбора с варианта доставки "Яндекс.Доставка" (настроенного в CMS)
             'unSelectYdVariant': function () { yd$('#delivery_2').prop('checked', false) },
-            //автодополнение
+            // автодополнение
             'autocomplete': ['city', 'street', 'index'],
             'cityEl': '#city',
             'streetEl': '#street',
             'houseEl': '#building',
             'indexEl': '#index',
-            //создавать заказ в cookie для его последующего создания в Яндекс.Доставке только если выбрана доставка Яндекса
+            // создавать заказ в cookie для его последующего создания в Яндекс.Доставке только если выбрана доставка Яндекса
             'createOrderFlag': function () { return yd$('#delivery_2').is(':checked') },
-            //необходимые для создания заказа поля
-            //возможно указывать и другие поля, см. объект Order в документации
+            // необходимые для создания заказа поля
+            //в озможно указывать и другие поля, см. объект Order в документации
             'order': {
-                //имя, фамилия, телефон, улица, дом, индекс
+                // имя, фамилия, телефон, улица, дом, индекс
                 'recipient_first_name': function () { return yd$('#receiver').val() },
                 'recipient_last_name': function () { return yd$('#surname').val() },
                 'recipient_phone': function () { return yd$('#phone').val() },
                 'deliverypoint_street': function () { return yd$('#street').val() },
                 'deliverypoint_house': function () { return yd$('#building').val() },
                 'deliverypoint_index': function () { return yd$('#index').val() },
-                //объявленная ценность заказа
+                // объявленная ценность заказа
                 'order_assessed_value': cart.cost,
-                //товарные позиции в заказе
-                //возможно указывать и другие поля, см. объект OrderItem в документации
+                // товарные позиции в заказе
+                // возможно указывать и другие поля, см. объект OrderItem в документации
                 'order_items': function () {
                     var items = [];
                     {foreach $products as $product}
@@ -227,8 +227,8 @@
                     return items;
                 }
             },
-            //id элемента для вывода ошибок валидации. Вместо него можно указать параметр onValidationEnd, для кастомизации
-            //вывода ошибок
+            // id элемента для вывода ошибок валидации. Вместо него можно указать параметр onValidationEnd, для кастомизации
+            // вывода ошибок
             'errorsEl': 'yd_errors',
         })
 
